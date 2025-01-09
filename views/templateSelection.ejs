@@ -242,8 +242,8 @@
             const inputField = document.createElement("input");
             inputField.type = "text";
             inputField.name = `header_${index}`;
-            inputField.value = param.text; // Pre-fill with the provided value
-            inputField.placeholder = `Enter text for header (e.g., ${param.text})`;
+            // inputField.value = param.text; // Pre-fill with the provided value
+            inputField.placeholder = `(e.g., ${param.text})`;
 
             document.getElementById("header-inputs").appendChild(inputLabel);
             document.getElementById("header-inputs").appendChild(inputField);
@@ -262,8 +262,8 @@
             const inputField = document.createElement("input");
             inputField.type = "text";
             inputField.name = `body_${index}`;
-            inputField.value = param.text; // Pre-fill with the provided value
-            inputField.placeholder = `Enter text for body (e.g., ${param.text})`;
+            // inputField.value = param.text; // Pre-fill with the provided value
+            inputField.placeholder = `(e.g., ${param.text})`;
 
             document.getElementById("body-inputs").appendChild(inputLabel);
             document.getElementById("body-inputs").appendChild(inputField);
@@ -284,6 +284,7 @@
             inputField.name = `button_${index}`;
             inputField.value = param.text; // Pre-fill with the provided value
             inputField.placeholder = `Enter text for button (e.g., ${param.text})`;
+            // inputField.setAttribute("readonly", "true");
 
             document.getElementById("button-content").appendChild(inputLabel);
             document.getElementById("button-content").appendChild(inputField);

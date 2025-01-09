@@ -94,24 +94,23 @@ router.post("/submit-endpoint", async (req, res) => {
     const contacts = await fetchContacts();
 
     // Extract phone numbers from contacts
-    const phoneNumbers = contacts
-      .map((contact) => contact.Phone)
-      .filter(Boolean);
+    let phoneNumbers = contacts.map((contact) => contact.phone);
+    // console.log(phoneNumbers);
 
-    // Determine contacts to send message to
-    const targetContacts =
-      contact === "true"
-        ? phoneNumbers
-        : Array.isArray(contact)
-        ? contact
-        : [contact];
-
-    // Send WhatsApp messages to the selected contacts
-    await Promise.all(
-      targetContacts.map(async (phoneNumber) => {
-        await sendWhatsAppMessage(phoneNumber, updatedJsonbody, channel);
-      })
-    );
+    if (contact) {
+      // Send message to all phone numbers
+      phoneNumbers.forEach((phoneNumber) => {
+        sendWhatsAppMessage(phoneNumber, updatedJsonbody, channel);
+      });
+    } else if (Array.isArray(contact)) {
+      // Send message to all selected contacts
+      contact.forEach((contact) => {
+        sendWhatsAppMessage(contact, updatedJsonbody, channel);
+      });
+    } else {
+      // Send message to the selected contact
+      sendWhatsAppMessage(contact, updatedJsonbody, channel);
+    }
 
     // Respond with success message
     res.send("Messages sent successfully!");
